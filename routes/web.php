@@ -11,10 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get("index", [
-	"as"	=> "index",
-	"uses" 	=> "IndexController@index"]);
+
+Auth::routes();
+// Register
+// Route::get("/register", "UsersController@register")->name("users.register");
+// Route::post("/register", "UsersController@create");
+
+// Login
+// Route::get("/login", "UsersController@login")->name("users.login");
+// Route::post("/login", "UsersController@connect");
+
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::resources([
+	"annonce" => "AdsController"]);
+// Route::get("/", [
+	// "as"	=> "index",
+	// "uses" 	=> "IndexController@index"]);

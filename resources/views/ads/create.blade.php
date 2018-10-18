@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="cover-container">
-	<form method="POST" action="{{ route('annonce.store') }}">
+	<form method="POST" action="{{ route('annonce.store') }}" enctype="multipart/form-data">
 		@csrf
 
 		<div class="form-group">
@@ -39,7 +39,7 @@
 			<label for="image" class="col-form-label">{{ __('Image') }}</label>
 
 			<div class="col-md-12">
-				<input id="image" type="text" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" name="image" value="{{ old('image') }}" required autofocus>
+				<input id="image" type="file" name="image" required autofocus>
 
 				@if ($errors->has('image'))
 				<span class="invalid-feedback" role="alert">

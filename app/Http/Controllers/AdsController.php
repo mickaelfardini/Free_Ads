@@ -35,11 +35,9 @@ class AdsController extends Controller
 		$ad->title		= $request->title;
 		$ad->content	= $request->content;
 		$ad->price		= $request->price;
-
-
 		if ($ad->save()) {
-			$image->image 	= $request->image;
-			$image->ad_id	= $ad->id;
+			$image->image 	= $request->file('image')->store('images', 'public');
+			// $image->ad_id	= $ad->id;
 			if ($ad->image()->save($image)) {
 				session()->flash("flash", "Your ad is now online !");
 				session()->flash("flash-type", "success");

@@ -21,7 +21,7 @@
 						<a href="{{ route('annonce.edit', ['id' => $ad->id]) }}" class="btn-sm btn-danger">Edit</a>
 					@endif
 					</h3>
-					<p>$ {{$ad->price}} - <small>By {{$ad->user->name}}</small></p>
+					<p>$ {{$ad->price}} - <small>By <b>{{$ad->user->name}}</b> in the category - <b>{{$ad->category->name}}</b></small></p>
 					<br>
 					<p class="card-text">{{$ad->content}}</p>
 				</div>
@@ -31,8 +31,8 @@
 	</div>
 
 	<div class="row pl-3 pr-3">
-		<div class="col-md-12 mt-5 bg-light text-dark px-5">
-
+		<div class="col-md-12 bg-light text-dark px-5">
+			
 		</div>
 	</div>
 </div>

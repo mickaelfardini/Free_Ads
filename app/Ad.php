@@ -22,4 +22,9 @@ class Ad extends Model
 	{
 		return $this->belongsToMany('App\Image');
 	}
+
+	public function category()
+	{
+		return $this->belongsTo('App\Category', 'category_id', 'id');
+	}
 }

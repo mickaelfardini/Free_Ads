@@ -48,4 +48,16 @@ class AdsController extends Controller
 		session()->flash("flash-type", "danger");
 		return redirect()->route("home");
 	}
+
+	public function show(int $id)
+	{
+		$ad = Ad::find($id);
+		return view("ads.show", compact('ad'));
+	}
+
+	public function edit(int $id)
+	{
+		$ad = Ad::find($id);
+		return view("ads.edit", compact('ad'));
+	}
 }

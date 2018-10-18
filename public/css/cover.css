@@ -158,3 +158,11 @@ body {
     width: 42rem;
   }
 }
+
+.xs {
+  font-size: 8px;
+}
+
+.bg-black {
+  background-color: #cc34;
+}

@@ -17,4 +17,9 @@ class Ad extends Model
 	{
 		return $this->belongsTo('App\User', 'user_id', 'id');
 	}
+
+	public function image()
+	{
+		return $this->belongsToMany('App\Image');
+	}
 }

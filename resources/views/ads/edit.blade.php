@@ -4,8 +4,9 @@
 
 @section('content')
 <div class="mt-5 container text-left">
-	<form action="{{ route('annonce.update', ['id' => $ad->id]) }}" method="PUT">
-		
+	<form action="{{ route('annonce.update', ['id' => $ad->id]) }}" enctype="multipart/form-data" method="POST">
+		@csrf
+		@method("PUT")
 		<div class="card bg-dark">
 			<div class="row ">
 				<div class="col-md-4">
@@ -34,6 +35,9 @@
 			<div class="col-md-12 bg-light text-dark px-5">
 
 			</div>
+		</div>
+		<div class="form-group">
+			<input type="submit" class="btn btn-primary" value="Edit">
 		</div>
 	</form>
 </div>

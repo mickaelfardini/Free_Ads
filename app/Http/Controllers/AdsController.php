@@ -38,7 +38,6 @@ class AdsController extends Controller
 		$ad->price		= $request->price;
 		if ($ad->save()) {
 			$image->image 	= $request->file('image')->store('images', 'public');
-			// $image->ad_id	= $ad->id;
 			if ($ad->image()->save($image)) {
 				session()->flash("flash", "Your ad is now online !");
 				session()->flash("flash-type", "success");
@@ -59,6 +58,19 @@ class AdsController extends Controller
 	public function edit(int $id)
 	{
 		$ad = Ad::find($id);
+		if ($ad->user->id != Auth::user()->id) {
+			return redirect()->back();
+		}
 		return view("ads.edit", compact('ad'));
+	}
+
+	public function update(Request $request, int $id)
+	{
+		if(Ad::find($id)->update($request->all()))
+		{
+			session()->flash("flash", "Edited");
+			session()->flash("flash-type", "success");
+			return redirect("/annonce/$id");
+		}
 	}
 }

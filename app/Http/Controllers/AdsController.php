@@ -15,6 +15,7 @@ class AdsController extends Controller
 	{
 		$this->middleware("auth");
 	}
+
 	public function index()
 	{
 		$ads = Ad::with("Image")->get();
@@ -23,7 +24,8 @@ class AdsController extends Controller
 
 	public function create()
 	{
-		return view("ads.create");
+		$categories = Category::get(['name', 'id']);
+		return view("ads.create", compact('categories'));
 	}
 
 	public function store(Request $request)
@@ -34,6 +36,7 @@ class AdsController extends Controller
 
 		$ad->user_id	= Auth::user()->id;
 		$ad->title		= $request->title;
+		$ad->category_id= $request->category;
 		$ad->content	= $request->content;
 		$ad->price		= $request->price;
 		if ($ad->save()) {

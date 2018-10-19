@@ -54,8 +54,11 @@
 		<div class="form-group row">
 
 			<div class="col-md-8">
-				<select id="category" type="text" class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="{{ old('category') }}" autofocus>
-					
+				<select id="category" type="text" class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="" autofocus required>
+						<option></option>
+					@foreach ($categories as $category)
+						<option value="{{$category->id}}">{{$category->name}}</option>
+					@endforeach
 				</select>
 
 				@if ($errors->has('category'))

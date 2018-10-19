@@ -29,6 +29,6 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::resources([
 	"annonce" => "AdsController"]);
-// Route::get("/", [
-	// "as"	=> "index",
-	// "uses" 	=> "IndexController@index"]);
+Route::resources([
+	"user" => "UsersController"]);
+Route::get("/user/myads", "UsersController@getAds");

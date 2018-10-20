@@ -27,8 +27,19 @@ Auth::routes();
 
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::resources([
-	"annonce" => "AdsController"]);
-Route::resources([
-	"user" => "UsersController"]);
-Route::get("/user/myads", "UsersController@getAds");
+Route::middleware(['auth'])->group(function() {
+	Route::resource("annonce", "AdsController", ["parameters" => [
+		'annonce' => 'id'
+	]]);
+	
+	Route::get("/annonce/my-ads", "AdsController@myAds")
+		->name('annonce.myads');
+
+	Route::prefix('admin')->group(function() {
+		Route::resource("user", "UsersController", ["parameters" => [
+			'user' => 'id'
+		]]);
+	});
+
+	// Message
+});

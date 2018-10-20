@@ -1,38 +1,63 @@
 @extends('layouts.default')
-@isset ($keyword)
-	@section('title', 'Result for : ' . $keyword)
-@else
-	@section('title', 'Browse Ads')
-@endisset
+
+@section('title', 'Browse Ads')
 
 @section('content')
 
-@isset ($keyword)
-	<h1>Result for " {{$keyword}} "</h1>
-@endisset
 <div class="mt-5 container text-left">
-	@foreach ($ads as $ad)
-		<div class="mt-5 card bg-dark">
-			<div class="row ">
-				<div class="col-md-4">
-					@isset ($ad->image[0])
-						<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100">
-					@else
-						<img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
-					@endisset
-				</div>
-				<div class="col-md-8 px-3">
-					<div class="card-block px-3">
-						<br><br>
-						<h4 class="card-title">{{$ad->title}}</h4>
-						<p>$ {{$ad->price}} - <small>By {{$ad->user->name}}</small></p>
-						<br>
-						<p class="card-text">{{substr($ad->content, 0, 200)}}</p>
-						<a href="{{ route('annonce.show', ['id' => $ad->id]) }}" class="btn btn-primary">Read More</a>
-					</div>
+	@if ($potential)
+		<div>
+			<h2>A voir ?</h2>
+			<div class="mt-5 card bg-dark">
+		<div class="row ">
+			<div class="col-md-4">
+				@isset ($potential->image[0])
+				<img src="{{ asset("storage/" . $potential->image[0]->image) }}" width="350" height="350" class="w-100">
+				@else
+				<img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
+				@endisset
+			</div>
+			<div class="col-md-8 px-3">
+				<div class="card-block px-3">
+					<br><br>
+					<h4 class="card-title">{{$potential->title}}</h4>
+					<p>$ {{$potential->price}} - <small>By {{$potential->user->name}}</small></p>
+					<br>
+					<p class="card-text">{{substr($potential->content, 0, 200)}}</p>
+					<a href="{{ route('annonce.show', ['id' => $potential->id]) }}" class="btn btn-primary">Read More</a>
 				</div>
 			</div>
 		</div>
-@endforeach
+	</div>
+		</div>
+	@endif
+	<hr>
+	<h2>Browse Ads</h2>
+	@foreach ($ads as $ad)
+	<div class="mt-5 card bg-dark">
+		<div class="row ">
+			<div class="col-md-4">
+				@isset ($ad->image[0])
+				<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100">
+				@else
+				<img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
+				@endisset
+			</div>
+			<div class="col-md-8 px-3">
+				<div class="card-block px-3">
+					<br><br>
+					<h4 class="card-title">{{$ad->title}}</h4>
+					<p>$ {{$ad->price}} - <small>By {{$ad->user->name}}</small></p>
+					<br>
+					<p class="card-text">{{substr($ad->content, 0, 200)}}</p>
+					<a href="{{ route('annonce.show', ['id' => $ad->id]) }}" class="btn btn-primary">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	@endforeach
+	<div class="cover-container mt-5">
+		{{$ads->render()}}
+	</div>
 </div>
 @endsection

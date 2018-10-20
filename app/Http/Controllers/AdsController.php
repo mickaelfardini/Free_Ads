@@ -13,8 +13,15 @@ class AdsController extends Controller
 {
 	public function index()
 	{
-		$ads = Ad::with("Image")->get();
-		return view("ads.index", compact("ads"));
+		$potential = null;
+		if (Auth::user()->favorite_category) {
+			$potential = Ad::with("Image")
+				->where('category_id', '=', Auth::user()->favorite_category)
+				->orderByRaw('RAND()')
+				->first();
+		}
+		$ads = Ad::with("Image", "Category")->paginate(10);
+		return view("ads.index", compact("ads", "potential"));
 	}
 
 	public function create()
@@ -81,7 +88,7 @@ class AdsController extends Controller
 				$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
 				$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
 			})
-			->get();
+			->paginate(10);
 		return view('ads.search', compact('ads', 'keyword'));
 	}
 

@@ -29,5 +29,8 @@
 			</div>
 		</div>
 @endforeach
+<div class="cover-container mt-5">
+		{{$ads->render()}}
+	</div>
 </div>
 @endsection

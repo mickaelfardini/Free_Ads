@@ -24,7 +24,7 @@
 </head>
 <body>
 	<div id="app">
-		<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+		<nav class="navbar navbar-expand-md fixed-top navbar-light navbar-laravel">
 			<div class="container">
 				<a class="navbar-brand" href="{{ url('/') }}">
 					@yield("title")
@@ -36,11 +36,16 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<!-- Left Side Of Navbar -->
 					<ul class="navbar-nav mr-auto">
-
+						
 					</ul>
-
 					<!-- Right Side Of Navbar -->
 					<ul class="navbar-nav ml-auto">
+						<form action="{{ route('annonce.search') }}" method="POST">
+							@csrf
+							<div class="md-form mt-0">
+								<input class="form-control" type="text" placeholder="Search" name="search" aria-label="Search">
+							</div>
+						</form>
 						<!-- Authentication Links -->
 						@guest
 						<li class="nav-item">
@@ -75,13 +80,13 @@
 		</div>
 	</nav>
 
-	<main class="py-4">
+	<main class="mt-5 py-4">
 		<div class="container">
-		@if (session()->has('flash'))
-		<div class="alert alert-{{ session()->get('flash-type')}}">
-			{{ session()->get('flash') }}
-		</div>
-		@endif
+			@if (session()->has('flash'))
+			<div class="alert alert-{{ session()->get('flash-type')}}">
+				{{ session()->get('flash') }}
+			</div>
+			@endif
 		</div>
 		@yield('content')
 	</main>

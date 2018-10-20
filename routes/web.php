@@ -41,5 +41,8 @@ Route::middleware(['auth'])->group(function() {
 		]]);
 	});
 
+	Route::get("/annonce/search/{keyword}", "AdsController@searchResult");
+	Route::post("/annonce/search", "AdsController@search")
+		->name('annonce.search');
 	// Message
 });

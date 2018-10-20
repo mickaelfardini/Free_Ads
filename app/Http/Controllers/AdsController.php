@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdsController extends Controller
 {
-	public function __construct()
-	{
-		// $this->middleware("auth");
-	}
-
 	public function index()
 	{
 		$ads = Ad::with("Image")->get();
@@ -75,5 +70,23 @@ class AdsController extends Controller
 			session()->flash("flash-type", "success");
 			return redirect("/annonce/$id");
 		}
+	}
+
+	public function searchResult($keyword)
+	{
+		$ads = Ad::select('ads.*')
+			->leftJoin('categories', 'category_id', '=', 'categories.id')
+			->where(function ($query) use ($keyword) {
+				$query->where('categories.name', '=', $keyword);
+				$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
+				$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
+			})
+			->get();
+		return view('ads.search', compact('ads', 'keyword'));
+	}
+
+	public function search(Request $request)
+	{
+		return redirect('/annonce/search/' .$request->get("search"));
 	}
 }

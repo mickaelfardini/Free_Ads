@@ -1,15 +1,10 @@
 @extends('layouts.default')
-@isset ($keyword)
-	@section('title', 'Result for : ' . $keyword)
-@else
-	@section('title', 'Browse Ads')
-@endisset
+
+@section('title', 'Result for : ' . $keyword)
 
 @section('content')
 
-@isset ($keyword)
-	<h1>Result for " {{$keyword}} "</h1>
-@endisset
+<h1>Result for " {{$keyword}} "</h1>
 <div class="mt-5 container text-left">
 	@foreach ($ads as $ad)
 		<div class="mt-5 card bg-dark">

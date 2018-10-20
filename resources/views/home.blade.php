@@ -27,7 +27,7 @@
 			  <img class="rounded-circle" src="{{ asset('img/search.png') }}" alt="Generic placeholder image" width="100" height="100">
 			  <h3>My Ads</h3>
 			  <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-			  <p><a class="btn btn-secondary" href="#" role="button">My Ads &raquo;</a></p>
+			  <p><a class="btn btn-secondary" href="{{ route('annonce.myads') }}" role="button">My Ads &raquo;</a></p>
 		  </div><!-- /.col-lg-4 -->
 	  </div><!-- /.row -->
   {{-- </div> --}}

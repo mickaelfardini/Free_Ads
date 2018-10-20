@@ -35,8 +35,6 @@ class AdsController extends Controller
 	public function store(Request $request)
 	{
 		$ad = new Ad;
-		$image = new Image;
-
 
 		$ad->user_id	= Auth::user()->id;
 		$ad->title		= $request->title;
@@ -44,12 +42,14 @@ class AdsController extends Controller
 		$ad->content	= $request->content;
 		$ad->price		= $request->price;
 		if ($ad->save()) {
-			$image->image 	= $request->file('image')->store('images', 'public');
-			if ($ad->image()->save($image)) {
-				session()->flash("flash", "Your ad is now online !");
-				session()->flash("flash-type", "success");
-				return redirect()->route('annonce.index');
+			foreach ($request->file('image') as $img) {
+				$image = new Image;
+				$image->image 	= $img->store('images', 'public');
+				$ad->image()->save($image);
 			}
+			session()->flash("flash", "Your ad is now online !");
+			session()->flash("flash-type", "success");
+			return redirect()->route('annonce.index');
 		}
 		session()->flash("flash", "An error has occured ..");
 		session()->flash("flash-type", "danger");
@@ -81,14 +81,22 @@ class AdsController extends Controller
 		}
 	}
 
-	public function searchResult($keyword)
+	public function searchResult(Request $request, $keyword)
 	{
 		$ads = Ad::select('ads.*')
 			->leftJoin('categories', 'category_id', '=', 'categories.id')
-			->where(function ($query) use ($keyword) {
-				$query->where('categories.name', '=', $keyword);
-				$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
-				$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
+			->where(function ($query) use ($keyword, $request) {
+				if ($request->has('category')) {
+					$query->where('categories.name', '=', $keyword);
+				} elseif ($request->has('title')) {
+					$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
+				} elseif ($request->has('content')) {
+					$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
+				} else {
+					$query->where('categories.name', '=', $keyword);
+					$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
+					$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
+				}
 			})
 			->orderByRaw('created_at DESC')
 			->paginate(10);
@@ -97,7 +105,13 @@ class AdsController extends Controller
 
 	public function search(Request $request)
 	{
-		return redirect('/annonce/search/' .$request->get("search"));
+		if ($request->get('search')) {
+			if ($request->get('filter')) {
+				return redirect('/annonce/search/' . $request->get("search"). "?".$request->get('filter'));
+			}
+			return redirect('/annonce/search/' .$request->get("search"));
+		}
+		return redirect()->back();
 	}
 
 	public function myAds()

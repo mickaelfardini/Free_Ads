@@ -36,11 +36,11 @@
 		</div>
 
 		<div class="form-group">
-			<label for="image" class="col-form-label">{{ __('Image') }}</label>
-
 			<div class="col-md-12">
-				<input id="image" type="file" name="image" required autofocus>
-
+				<label class="custom-file">
+					<input type="file" id="image" class="custom-file-input" name="image[]" multiple required autofocus>
+					<span class="custom-file-control">Choose your pictures ..</span>
+				</label>
 				@if ($errors->has('image'))
 				<span class="invalid-feedback" role="alert">
 					<strong>{{ $errors->first('image') }}</strong>
@@ -49,15 +49,15 @@
 			</div>
 		</div>
 
-			<label for="category" class="col-form-label col-sm-8">{{ __('Category') }}</label>
-			<label for="price" class="col-form-label col-sm-3">{{ __('Price') }}</label>
+		<label for="category" class="col-form-label col-sm-8">{{ __('Category') }}</label>
+		<label for="price" class="col-form-label col-sm-3">{{ __('Price') }}</label>
 		<div class="form-group row">
 
 			<div class="col-md-8">
 				<select id="category" type="text" class="form-control{{ $errors->has('category') ? ' is-invalid' : '' }}" name="category" value="" autofocus required>
-						<option></option>
+					<option></option>
 					@foreach ($categories as $category)
-						<option value="{{$category->id}}">{{$category->name}}</option>
+					<option value="{{$category->id}}">{{$category->name}}</option>
 					@endforeach
 				</select>
 

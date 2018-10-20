@@ -40,9 +40,15 @@
 					</ul>
 					<!-- Right Side Of Navbar -->
 					<ul class="navbar-nav ml-auto">
-						<form action="{{ route('annonce.search') }}" method="POST">
+						<form action="{{ route('annonce.search') }}" method="POST" class="form-inline">
 							@csrf
 							<div class="md-form mt-0">
+								<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="filter" name="filter">
+									<option value="" selected>Choose...</option>
+									<option value="title">Title</option>
+									<option value="content">Content</option>
+									<option value="category">Category</option>
+								</select>
 								<input class="form-control" type="text" placeholder="Search" name="search" aria-label="Search">
 							</div>
 						</form>

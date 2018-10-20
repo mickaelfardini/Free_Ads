@@ -20,7 +20,9 @@ class AdsController extends Controller
 				->orderByRaw('RAND()')
 				->first();
 		}
-		$ads = Ad::with("Image", "Category")->paginate(10);
+		$ads = Ad::with("Image", "Category")
+			->orderByRaw('created_at DESC')
+			->paginate(10);
 		return view("ads.index", compact("ads", "potential"));
 	}
 
@@ -88,6 +90,7 @@ class AdsController extends Controller
 				$query->orWhere('title', 'LIKE', '%' . $keyword . '%');
 				$query->orWhere('content', 'LIKE', '%' . $keyword . '%');
 			})
+			->orderByRaw('created_at DESC')
 			->paginate(10);
 		return view('ads.search', compact('ads', 'keyword'));
 	}
@@ -95,5 +98,15 @@ class AdsController extends Controller
 	public function search(Request $request)
 	{
 		return redirect('/annonce/search/' .$request->get("search"));
+	}
+
+	public function myAds()
+	{
+		$ads = Ad::with('Image', 'Category')
+			->where('user_id', '=', Auth::user()->id)
+			->orderByRaw('created_at DESC')
+			->paginate(10);
+
+		return view('users.myAds', compact('ads'));
 	}
 }

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 
-@section('title', 'Browse Ads')
+@section('title', 'My Ads')
 
 @section('content')
 

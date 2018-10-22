@@ -16,7 +16,7 @@
 // });
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 // Register
 // Route::get("/register", "UsersController@register")->name("users.register");
 // Route::post("/register", "UsersController@create");
@@ -27,8 +27,8 @@ Auth::routes();
 
 
 Route::get('/activate/{code}', 'Auth\RegisterController@activate')->name('activate.user');
-Route::get('/', 'HomeController@index')->name('home');
 Route::middleware(['auth', 'verified'])->group(function() {
+Route::get('/', 'HomeController@index')->name('home');
 	Route::resource("annonce", "AdsController", ["parameters" => [
 		'annonce' => 'id'
 	]]);
@@ -47,3 +47,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
 		->name('annonce.search');
 	// Message
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -26,8 +26,9 @@ Auth::routes();
 // Route::post("/login", "UsersController@connect");
 
 
+Route::get('/activate/{code}', 'Auth\RegisterController@activate')->name('activate.user');
 Route::get('/', 'HomeController@index')->name('home');
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth', 'verified'])->group(function() {
 	Route::resource("annonce", "AdsController", ["parameters" => [
 		'annonce' => 'id'
 	]]);

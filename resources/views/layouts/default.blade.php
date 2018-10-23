@@ -37,6 +37,8 @@
 					</ul>
 					<!-- Right Side Of Navbar -->
 					<ul class="navbar-nav ml-auto">
+						<li>
+							
 						<form action="{{ route('annonce.search') }}" method="POST" class="form-inline">
 							@csrf
 							<div class="md-form mt-0">
@@ -49,6 +51,7 @@
 								<input class="form-control" type="text" placeholder="Search" name="search" aria-label="Search">
 							</div>
 						</form>
+						</li>
 						<!-- Authentication Links -->
 						@guest
 						<li class="nav-item">
@@ -61,7 +64,7 @@
 						</li>
 						@else
 						<li class="nav-item dropdown">
-							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								{{ Auth::user()->name }} 
 								@isset($new_message)
 									@if ($new_message)

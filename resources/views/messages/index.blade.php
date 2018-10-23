@@ -9,10 +9,14 @@
 	<ul class="list-group list-group-flush mt-5">
 		@forelse ($messages as $message)
 		@if ($message->read_count <= 0)
+		<li>
 			<b><a href="{{ route('message.show', ['id' => $message->id]) }}" class="list-group-item text-truncate" max-width="500" style="background-color: #333">{{$message->user->name}} : <span class="badge badge-pill badge-danger">&nbsp;</span> {{$message->content}}</a>
 			</b>
+		</li>
 		@else
+		<li>
 		<a href="{{ route('message.show', ['id' => $message->id]) }}" class="list-group-item text-truncate" style="background-color: #333">{{$message->user->name}} : {{$message->content}}</a>
+		</li>
 		@endif
 		@empty
 		<h5>Pas de message</h5>

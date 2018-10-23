@@ -8,7 +8,7 @@
 	<div class="card bg-dark">
 		<div class="row ">
 			<div class="col-md-4">
-				<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100">
+				<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100" alt="{{$ad->title}}">
 			</div>
 			<div class="col-md-8 px-3">
 				<div class="card-block px-3">

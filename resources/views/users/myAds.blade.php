@@ -10,11 +10,7 @@
 	<div class="mt-5 card bg-dark">
 		<div class="row ">
 			<div class="col-md-4">
-				@isset ($ad->image[0])
-				<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100">
-				@else
-				<img src="https://placeholdit.imgix.net/~text?txtsize=38&txt=400%C3%97400&w=400&h=400" class="w-100">
-				@endisset
+				<img src="{{ asset("storage/" . $ad->image[0]->image) }}" width="350" height="350" class="w-100" alt="{{$ad->title}}">
 			</div>
 			<div class="col-md-8 px-3">
 				<div class="card-block px-3">

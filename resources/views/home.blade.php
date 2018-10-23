@@ -13,7 +13,7 @@
 			  <img class="rounded-circle" src="{{ asset('img/refresh.png') }}" alt="Generic placeholder image" width="100" height="100">
 			  <h3>My Message</h3>
 			  <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-			  <p><a class="btn btn-secondary" href="#" role="button">&laquo; My Message</a></p>
+			  <p><a class="btn btn-secondary" href="{{ route('message.index') }}" role="button">&laquo; My Message</a></p>
 		  </div><!-- /.col-lg-4 -->
 		  <div class="col-lg-4">
 			  <img class="rounded-circle" src="{{ asset('img/money.png') }}" alt="Generic placeholder image" width="150" height="150">

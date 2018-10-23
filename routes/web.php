@@ -16,37 +16,36 @@
 // });
 
 
+// Verification Email
 Auth::routes(['verify' => true]);
-// Register
-// Route::get("/register", "UsersController@register")->name("users.register");
-// Route::post("/register", "UsersController@create");
-
-// Login
-// Route::get("/login", "UsersController@login")->name("users.login");
-// Route::post("/login", "UsersController@connect");
 
 
-Route::get('/activate/{code}', 'Auth\RegisterController@activate')->name('activate.user');
+// MiddleWare Auth ( If not connected and not verified)
 Route::middleware(['auth', 'verified'])->group(function() {
-Route::get('/', 'HomeController@index')->name('home');
+
+	// Home
+	Route::get('/', 'HomeController@index')->name('home');
+	
+	// Annonce Resource
 	Route::resource("annonce", "AdsController", ["parameters" => [
 		'annonce' => 'id'
 	]]);
-	
+	// Annonce Custom
 	Route::get("/annonce/my-ads", "AdsController@myAds")
 		->name('annonce.myads');
-
+	Route::get("/annonce/search/{keyword}", "AdsController@searchResult");
+	Route::post("/annonce/search", "AdsController@search")
+		->name('annonce.search');
+		
+	// Admin Prefix
 	Route::prefix('admin')->group(function() {
 		Route::resource("user", "UsersController", ["parameters" => [
 			'user' => 'id'
 		]]);
 	});
-
-	Route::get("/annonce/search/{keyword}", "AdsController@searchResult");
-	Route::post("/annonce/search", "AdsController@search")
-		->name('annonce.search');
-	// Message
+	
+	// Message Resource
+	Route::resource("message", "MessagesController", []);
+	Route::post("/message/create", "MessagesController@create")->name('message.create');
 });
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

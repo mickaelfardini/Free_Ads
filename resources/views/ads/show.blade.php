@@ -32,7 +32,12 @@
 
 	<div class="row pl-3 pr-3">
 		<div class="col-md-12 bg-light text-dark px-5">
-			
+			<form action="{{route('message.create')}}" method="POST">
+			@csrf
+				<input type="submit" class="btn btn-success" value="Message">
+				<input type="hidden" name="ad_id" value="{{$ad->id}}">
+				<input type="hidden" name="receiver_id" value="{{$ad->user->id}}">
+			</form>
 		</div>
 	</div>
 </div>

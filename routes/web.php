@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
 	Route::resource("user", "UsersController", ["parameters" => [
 		'user' => 'id'
 	]]);
+	Route::get('/user/edit', "UsersController@edit")->name('user.edit');
 
 	// Message Resource
 	Route::resource("message", "MessagesController", ["parameters" => [

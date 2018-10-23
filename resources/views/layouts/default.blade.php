@@ -75,7 +75,7 @@
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Profile</a>
+								<a class="dropdown-item" href="{{ route('user.index') }}">Profile</a>
 								<a class="dropdown-item" href="{{ route('message.index') }}">Messages
 									@isset ($new_message)
 										@if ($new_message)

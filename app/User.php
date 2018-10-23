@@ -19,12 +19,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'name', 'email', 'password', 'favorite_category', 'status'
     ];
 
+    public function category()
+    {
+        return $this->belongsTo('App\Category', 'favorite_category', 'id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 }

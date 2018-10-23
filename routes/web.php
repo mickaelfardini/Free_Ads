@@ -37,13 +37,11 @@ Route::middleware(['auth', 'verified'])->group(function() {
 	Route::post("/annonce/search", "AdsController@search")
 		->name('annonce.search');
 		
-	// Admin Prefix
-	Route::prefix('admin')->group(function() {
-		Route::resource("user", "UsersController", ["parameters" => [
-			'user' => 'id'
-		]]);
-	});
-	
+	// User Resource
+	Route::resource("user", "UsersController", ["parameters" => [
+		'user' => 'id'
+	]]);
+
 	// Message Resource
 	Route::resource("message", "MessagesController", ["parameters" => [
 			'message' => 'id'

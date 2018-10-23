@@ -9,9 +9,6 @@
 
 	<title>Free Ads - @yield("title")</title>
 
-	<!-- Scripts -->
-	<script src="{{ asset('js/app.js') }}" defer></script>
-
 	<!-- Fonts -->
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -116,5 +113,11 @@
 		@yield('content')
 	</main>
 </div>
+
+	<!-- Scripts -->
+	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+	{{-- <script src="{{ asset('js/bootstrap.js') }}"></script> --}}
+	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('js/bootstrap-4.1.3.min.js') }}"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 <div class="mt-5 container text-left">
 	<h2>My Ads</h2>
-	@foreach ($ads as $ad)
+	@forelse ($ads as $ad)
 	<div class="mt-5 card bg-dark">
 		<div class="row ">
 			<div class="col-md-4">
@@ -28,7 +28,9 @@
 			</div>
 		</div>
 	</div>
-	@endforeach
+	@empty
+	<h5>You don't have any ads yet, click <a href="{{ route('annonce.create') }}" class="text-primary">HERE</a> to create your first ad.</h5>
+	@endforelse
 	<div class="cover-container mt-5">
 		{{$ads->render()}}
 	</div>

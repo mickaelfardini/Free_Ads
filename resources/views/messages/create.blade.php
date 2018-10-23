@@ -8,6 +8,7 @@
 	<form method="POST" action="{{ route('message.store') }}" enctype="multipart/form-data">
 		@csrf
 		<input type="hidden" name="receiver_id" value="{{$receiver->id}}">
+		<input type="hidden" name="ad_id" value="{{$ad->id}}">
 		<div class="from-group">
 			<label class="col-form-label"><b>To : {{$receiver->name}}</b></label>
 		</div>

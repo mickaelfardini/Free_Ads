@@ -17,8 +17,8 @@ class MessagesController extends Controller
 	 */
 	public function index()
 	{
-		$messages = Message::where('sender_id', '=', Auth::user()->id)
-		->where('receiver_id', '=', Auth::user()->id)
+		$messages = Message::with(['User'])->where('receiver_id', '=', Auth::user()->id)
+		->orderByRaw('created_at DESC')
 		->get();
 		return view('messages.index', compact('messages'));
 	}
@@ -50,6 +50,7 @@ class MessagesController extends Controller
 
 		$message->receiver_id 	= $request->get('receiver_id');
 		$message->sender_id 	= Auth::user()->id;
+		$message->ad_id 	= $request->get('ad_id');
 		$message->content		= $request->get('content');
 
 		if ($message->save()) {

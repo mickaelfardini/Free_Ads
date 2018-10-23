@@ -16,8 +16,7 @@ class Controller extends BaseController
 	public function __construct()
 	{
 		$this->middleware(function ($request, $next) {
-			$new_message = Message::where('sender_id', '=', Auth::user()->id)
-				->where('receiver_id', '=', Auth::user()->id)
+			$new_message = Message::where('receiver_id', '=', Auth::user()->id)
 				->where('read_count', '0')
 				->first();
 			view()->share(compact('new_message'));

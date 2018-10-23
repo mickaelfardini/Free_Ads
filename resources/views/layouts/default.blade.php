@@ -66,18 +66,22 @@
 						<li class="nav-item dropdown">
 							<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 								{{ Auth::user()->name }} 
-								@if (!empty($new_message))
-									<span class="badge badge-pill badge-danger">+</span>
+								@isset($new_message)
+									@if ($new_message)
+										<span class="badge badge-pill badge-danger">{{$new_message}}</span>
 									@endif
+								@endisset
 								<span class="caret"></span>
 							</a>
 
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="#">Profile</a>
 								<a class="dropdown-item" href="{{ route('message.index') }}">Messages
-									@if (!empty($new_message))
-									<span class="badge badge-pill badge-danger">New</span>
-									@endif
+									@isset ($new_message)
+										@if ($new_message)
+										<span class="badge badge-pill badge-danger">New</span>
+										@endif
+									@endisset
 								</a>
 								<a class="dropdown-item" href="{{ route('annonce.myads') }}">
 									My Ads

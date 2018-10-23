@@ -45,7 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function() {
 	});
 	
 	// Message Resource
-	Route::resource("message", "MessagesController", []);
+	Route::resource("message", "MessagesController", ["parameters" => [
+			'message' => 'id'
+		]]);
 	Route::post("/message/create", "MessagesController@create")->name('message.create');
 });
 Auth::routes();

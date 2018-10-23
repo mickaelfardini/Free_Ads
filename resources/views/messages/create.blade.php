@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="mt-5 container text-left">
-	{{$userss}}
 	<form method="POST" action="{{ route('message.store') }}" enctype="multipart/form-data">
 		@csrf
 		<input type="hidden" name="receiver_id" value="{{$receiver->id}}">

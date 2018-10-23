@@ -67,9 +67,17 @@ class MessagesController extends Controller
 	 * @param  \App\Message  $message
 	 * @return \Illuminate\Http\Response
 	 */
-	public function show(Message $message)
+	public function show($id)
 	{
-		//
+		$message = Message::where('id', '=', $id)
+			->where('receiver_id', Auth::user()->id)
+			->first();
+		if (!$message) {
+			return redirect()->route('message.index');
+		}
+		$message->read_count = $message->read_count + 1;
+		$message->save();
+		return view('messages.show', compact('message'));
 	}
 
 	/**

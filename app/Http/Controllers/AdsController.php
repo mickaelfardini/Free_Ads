@@ -34,6 +34,9 @@ class AdsController extends Controller
 
 	public function store(Request $request)
 	{
+		$this->validate($request, [
+			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+		]);
 		$ad = new Ad;
 
 		$ad->user_id	= Auth::user()->id;

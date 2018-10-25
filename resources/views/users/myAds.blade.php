@@ -6,6 +6,7 @@
 
 <div class="mt-5 container text-left">
 	<h2>My Ads</h2>
+	<p>click <a href="{{ route('annonce.create') }}" class="text-primary">HERE</a> to create an ad.</p>
 	@forelse ($ads as $ad)
 	<div class="mt-5 card bg-dark">
 		<div class="row ">
@@ -25,7 +26,7 @@
 		</div>
 	</div>
 	@empty
-	<h5>You don't have any ads yet, click <a href="{{ route('annonce.create') }}" class="text-primary">HERE</a> to create your first ad.</h5>
+	<h5>You don't have any ads yet ..</h5>
 	@endforelse
 	<div class="cover-container mt-5">
 		{{$ads->render()}}

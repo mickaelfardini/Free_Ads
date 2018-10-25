@@ -35,7 +35,8 @@ class AdsController extends Controller
 	public function store(Request $request)
 	{
 		$this->validate($request, [
-			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+			'image.*' => 'image|mimes:jpeg,png,jpg|max:2048',
+			'price'   => 'int'
 		]);
 		$ad = new Ad;
 
